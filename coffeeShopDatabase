@@ -1,0 +1,67 @@
+create table "user" {
+    "fullname" varchar (80)
+    "email" varchar (80)
+    "password" varchar (80)
+    "address" varchar (80)
+    "phone" varchar (15)
+    "picture" link
+};
+
+create table "cart" {
+
+}
+
+create table "products" {
+    "name" varchar (80)
+    "description" ()
+    "price" int
+    "quantity" INT
+}
+
+create table "transaction" {
+    "delivery_method" varchar
+    "subtotal" int
+    "delivery_fee" int 
+    "tax" int 
+    "total" int
+    "transaction_id" varchar
+    "date" date
+    "status" varchar 
+    "payment_method" varchar
+}
+
+create table "transaction_product" {
+    "product_id" int    
+    "quantity" int
+    "size" varchar (10)
+    "varian" varchar (10)
+    "price" int 
+    "transaction_id" varchar
+}
+
+create table discount {
+    "isFlahSale" boolean
+    "discount_rate" float 
+    "disc_destribution" varchar (100)
+}
+
+create table product_variant {
+    "varian_name" varchar (80)
+    "add_price" int
+}
+
+create table "review" {
+    "review_description" varchar (100)
+    "rating" float
+}
+
+create table "product_category"{}
+
+create table "category" {}
+
+create table "product_size" {
+    "size_name" varchar (10)
+    
+}
+
+create table "product_images" {}
