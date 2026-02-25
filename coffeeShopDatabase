@@ -66,11 +66,11 @@ create table discount (
     "disc_destribution" varchar (100)
 );
 
-create table product_variant (
+create table "product_variant" (
     "id" serial primary key,
     "product_id" int references "products"("id"),
-    "varian_name" varchar (80),
-    "add_price" int
+    "variant_name" varchar (10),
+    "add_price" int default 0
 );
 
 create table "review" (
@@ -83,8 +83,9 @@ create table "review" (
 
 create table "product_size" (
     "id" serial primary key,
-    "product_id" int references "products"("id")
+    "product_id" int references "products"("id"),
     "size_name" varchar (10),
+    "add_price" int default 0
 );
 
 create table "product_images" (
@@ -92,7 +93,6 @@ create table "product_images" (
     "product_id" int references "products"("id"),
     "image_url" varchar (255)
 );
-
 
 INSERT INTO "user" (fullname, email, password, address, phone) VALUES
 ('Budi Santoso', 'budi@mail.com', 'pass123', 'Jakarta', '08123456789'),
@@ -158,6 +158,30 @@ insert into "products" (name, description, price, quantity) values
     '20'
 );
 
+INSERT INTO "product_size" (product_id, size_name, add_price) VALUES
+(1, 'Regular', 0),
+(2, 'Regular', 0),
+(2, 'Large', 5000),
+(3, 'Regular', 0),
+(3, 'Medium', 3000),
+(3, 'Large', 6000),
+(4, 'Regular', 0),
+(5, 'Regular', 0),
+(6, 'Regular', 0),
+(7, 'Large', 5000);
+
+INSERT INTO "product_variant" (product_id, variant_name, add_price) VALUES
+(1, 'Hot', 0),
+(2, 'Hot', 0),
+(2, 'Ice', 2000),
+(3, 'Hot', 0),
+(3, 'Ice', 2000),
+(4, 'Hot', 0),
+(5, 'Ice', 0),
+(6, 'Hot', 0),
+(6, 'Ice', 2000),
+(8, 'Ice', 0);
+
 INSERT INTO product_categories (product_id, category_id) VALUES 
 (1, 1),
 (2, 1), 
@@ -165,7 +189,7 @@ INSERT INTO product_categories (product_id, category_id) VALUES
 (4,1),
 (5,1);
 
-SELECT 
+SELECT
     p.name AS product_name, 
     c.name AS category_name
 FROM products p
@@ -183,3 +207,13 @@ INSERT INTO "transaction" (transaction_id, user_id, delivery_method, subtotal, d
 ('TRX008', 8, 'J&T', 95000, 15000, 9500, 119500, 'Success', 'Transfer'),
 ('TRX009', 9, 'Grab', 125000, 8000, 12500, 145500, 'Success', 'E-Wallet'),
 ('TRX010', 10, 'SiCepat', 450000, 25000, 45000, 520000, 'Pending', 'Transfer');
+
+SELECT
+    p.name AS product,
+    ps.size_name,
+    pv.variant_name,
+    (p.price + ps.add_price + pv.add_price) AS total_price
+FROM "products" p
+LEFT JOIN "product_size" ps ON p.id = ps.product_id
+LEFT JOIN "product_variant" pv ON p.id = pv.product_id
+WHERE p.id = 3;
