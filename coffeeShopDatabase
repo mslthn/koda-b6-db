@@ -13,7 +13,7 @@ create table "products" (
     "name" varchar (80),
     "description" varchar (255),
     "price" int,
-    "quantity" int
+    "quantity" int default 0
 );
 
 create table "category" (
@@ -94,119 +94,14 @@ create table "product_images" (
     "image_url" varchar (255)
 );
 
-INSERT INTO "user" (fullname, email, password, address, phone) VALUES
-('Budi Santoso', 'budi@mail.com', 'pass123', 'Jakarta', '08123456789'),
-('Siti Aminah', 'siti@mail.com', 'pass123', 'Bandung', '08123456780'),
-('Andi Wijaya', 'andi@mail.com', 'pass123', 'Surabaya', '08123456781'),
-('Rina Rose', 'rina@mail.com', 'pass123', 'Medan', '08123456782'),
-('Eko Prasetyo', 'eko@mail.com', 'pass123', 'Jogja', '08123456783'),
-('Dewi Lestari', 'dewi@mail.com', 'pass123', 'Bali', '08123456784'),
-('Fajar Nugraha', 'fajar@mail.com', 'pass123', 'Semarang', '08123456785'),
-('Gita Gutawa', 'gita@mail.com', 'pass123', 'Bogor', '08123456786'),
-('Hadi Surya', 'hadi@mail.com', 'pass123', 'Malang', '08123456787'),
-('Indah Permata', 'indah@mail.com', 'pass123', 'Solo', '08123456788');
 
-insert into "category" (name) values ('Coffee'), ('Non Coffee'), ('Foods');
-
-insert into "products" (name, description, price, quantity) values
-(
-    'Espresso', 
-    'Concentrated coffee made by forcing hot, pressurized water through finely-ground coffee, resulting in a strong, rich, syrupy shot topped with a reddish-brown foam called crema.',
-    '15000',
-    '50'
-),
-(
-    'Caramel Macchiato',
-    'Sweet, layered espresso drink with steamed milk, vanilla syrup, and a signature caramel drizzle on top, served hot or iced, creating a creamy, sweet, and slightly spiced coffee treat.',
-    '20000',
-    '50'
-),
-(
-    'Caffe Latte',
-    'Creamy coffee drink made with a shot or two of espresso, a generous amount of steamed milk, and a thin layer of milk foam, resulting in a milder, milkier coffee with a smooth, velvety texture and subtle coffee flavor.',
-    '24000',
-    '30'
-),
-(
-    'Hazelnut Latte',
-    'Creamy coffee drink blending rich espresso, steamed milk, and sweet hazelnut syrup, offering a smooth, nutty, and slightly sweet flavor profile.',
-    '15000',
-    '50'
-),
-(
-    'Frappucino',
-    'Creamy coffee drink blending rich espresso, steamed milk, and sweet hazelnut syrup, offering a smooth, nutty, and slightly sweet flavor profile.',
-    '10000',
-    '20'
-),
-(
-    'Matcha',
-    'Creamy matcha drink blending.',
-    '18000',
-    '23'
-),
-(
-    'Strawberry Matcha',
-    'Matcha with strawberry',
-    '25000',
-    '30'
-),
-(
-    'Chcolate Frappe',
-    'Chocolate creamy',
-    '17000',
-    '20'
-);
-
-INSERT INTO "product_size" (product_id, size_name, add_price) VALUES
-(1, 'Regular', 0),
-(2, 'Regular', 0),
-(2, 'Large', 5000),
-(3, 'Regular', 0),
-(3, 'Medium', 3000),
-(3, 'Large', 6000),
-(4, 'Regular', 0),
-(5, 'Regular', 0),
-(6, 'Regular', 0),
-(7, 'Large', 5000);
-
-INSERT INTO "product_variant" (product_id, variant_name, add_price) VALUES
-(1, 'Hot', 0),
-(2, 'Hot', 0),
-(2, 'Ice', 2000),
-(3, 'Hot', 0),
-(3, 'Ice', 2000),
-(4, 'Hot', 0),
-(5, 'Ice', 0),
-(6, 'Hot', 0),
-(6, 'Ice', 2000),
-(8, 'Ice', 0);
-
-INSERT INTO product_categories (product_id, category_id) VALUES 
-(1, 1),
-(2, 1), 
-(3, 1),
-(4,1),
-(5,1);
 
 SELECT
     p.name AS product_name, 
     c.name AS category_name
-FROM products p
+FROM "products" p
 JOIN product_categories pc ON p.id = pc.product_id
 JOIN category c ON pc.category_id = c.id;
-
-INSERT INTO "transaction" (transaction_id, user_id, delivery_method, subtotal, delivery_fee, tax, total, status, payment_method) VALUES
-('TRX001', 1, 'JNE', 15000000, 50000, 1500000, 16550000, 'Success', 'Transfer'),
-('TRX002', 2, 'Gojek', 75000, 15000, 7500, 97500, 'Success', 'E-Wallet'),
-('TRX003', 3, 'J&T', 1200000, 30000, 120000, 1350000, 'Pending', 'Credit Card'),
-('TRX004', 4, 'Grab', 200000, 10000, 20000, 230000, 'Success', 'E-Wallet'),
-('TRX005', 5, 'SiCepat', 8000000, 40000, 800000, 8840000, 'Success', 'Transfer'),
-('TRX006', 6, 'JNE', 600000, 20000, 60000, 680000, 'Success', 'Transfer'),
-('TRX007', 7, 'Gojek', 150000, 12000, 15000, 177000, 'Success', 'E-Wallet'),
-('TRX008', 8, 'J&T', 95000, 15000, 9500, 119500, 'Success', 'Transfer'),
-('TRX009', 9, 'Grab', 125000, 8000, 12500, 145500, 'Success', 'E-Wallet'),
-('TRX010', 10, 'SiCepat', 450000, 25000, 45000, 520000, 'Pending', 'Transfer');
 
 SELECT
     p.name AS product,
