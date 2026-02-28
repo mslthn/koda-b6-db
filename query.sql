@@ -21,3 +21,19 @@ FROM "products" p
 LEFT JOIN "product_size" ps ON p.id = ps.product_id
 LEFT JOIN "product_variant" pv ON p.id = pv.product_id
 WHERE p.id = '4' and ps.size_name = 'Medium' and pv.variant_name = 'Ice';
+
+-- analisis kebutuhan query di landing page
+SELECT
+    p.name,
+    p.description,
+    p.price
+FROM "products" p
+
+-- browse product 
+SELECT
+    p.name,
+    p.description,
+    p.price,
+    d.isFlashSale
+FROM "products" p
+LEFT JOIN 
