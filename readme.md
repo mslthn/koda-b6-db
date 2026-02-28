@@ -6,6 +6,7 @@ erDiagram
     direction TB
 
     PRODUCTS {
+        int id PK
         string name
         string description
         int price
@@ -13,6 +14,7 @@ erDiagram
     }
 
     USER {
+        int id PK
         string fullname
         string email
         string password
@@ -22,6 +24,8 @@ erDiagram
     }
 
     TRANSACTION {
+        int id PK
+        int user_id FK
         string delivery_method
         int subtotal
         int delivery_fee
@@ -34,24 +38,29 @@ erDiagram
     }
 
     TRANSACTION_PRODUCT {
-        int product_id
+        int id PK
+        int product_id FK
         int quantity
         string size
         string varian
         int price
-        string transaction_id
+        string transaction_id FK
     }
 
     CART {
     }
 
     DISCOUNT {
+        int id PK
+        int product_id FK
         boolean isFlashSale
-        int discount_rate
+        float discount_rate
         string disc_description
     }
 
     PRODUCT_VARIANT {
+        int id PK
+        int product_id FK
         string variant_name
         int add_price
     }
@@ -61,7 +70,9 @@ erDiagram
         string path
     }
 
-    CATEGORY {}
+    CATEGORY {
+        
+    }
 
     PRODUCT_CATEGORY {}
 
@@ -71,6 +82,9 @@ erDiagram
     }
 
     REVIEW {
+        int id PK
+        int pruduct_id FK
+        int user_id FK
         string review_description
         float rating
     }
