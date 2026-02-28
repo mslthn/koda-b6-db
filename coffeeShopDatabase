@@ -62,8 +62,8 @@ create table discount (
     "id" serial primary key,
     "product_id" int references "products"("id"),
     "isFlahSale" boolean,
-    "discount_rate" float, 
-    "disc_destribution" varchar (100)
+    "discount_rate" float,
+    "disc_description" varchar (100)
 );
 
 create table "product_variant" (
@@ -77,7 +77,7 @@ create table "review" (
     "id" serial primary key,
     "product_id" int references "products"("id"),
     "user_id" int references "user"("id"),
-    "review_description" varchar (255),
+    "review_description" varchar (255), 
     "rating" float
 );
 
@@ -93,22 +93,3 @@ create table "product_images" (
     "product_id" int references "products"("id"),
     "image_url" varchar (255)
 );
-
-
-
-SELECT
-    p.name AS product_name, 
-    c.name AS category_name
-FROM "products" p
-JOIN product_categories pc ON p.id = pc.product_id
-JOIN category c ON pc.category_id = c.id;
-
-SELECT
-    p.name AS product,
-    ps.size_name,
-    pv.variant_name,
-    (p.price + ps.add_price + pv.add_price) AS total_price
-FROM "products" p
-LEFT JOIN "product_size" ps ON p.id = ps.product_id
-LEFT JOIN "product_variant" pv ON p.id = pv.product_id
-WHERE p.id = 3;
